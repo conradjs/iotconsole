@@ -1,27 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+#include "main.h" 
 
-/* 
- * File:   main.c
- * Author: sconrad
- *
- * Created on October 30, 2016, 6:26 PM
- */
-
-#include <stdio.h>
-#include <stdlib.h>
-
-/*
- * 
- */
 int main(int argc, char** argv) {    
      
     char consoleInput = 0;
     
-    sysStart();
+    struct console_threads *c_threads;
+       
+    c_threads = (struct console_threads *) malloc(sizeof(struct console_threads));   
+    sysStart(c_threads);
     
     while (consoleInput != 'q')
     {
@@ -31,10 +17,13 @@ int main(int argc, char** argv) {
      
     sysStop();
     
+    free(c_threads);
+
+    
     return (EXIT_SUCCESS);
 }
 
-void sysStart(){
+void sysStart(struct console_threads* c_threads){
     serverStart();
     listenerStart();
 }
@@ -42,7 +31,7 @@ void sysStart(){
 void serverStart(){
     printf("***Conrad Household IoT Console*****\n");
     printf("Starting console server... ");
-    //Console server startup here        
+    console_start();       
     printf("Success\n");    
 }
 
@@ -59,7 +48,7 @@ void sysStop(){
 
 void serverStop(){
     printf("Terminating console server...\n");
-    //Server shutdown here
+    console_stop();
   
 }
 

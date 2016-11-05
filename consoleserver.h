@@ -10,6 +10,13 @@
  *
  * Created on October 30, 2016, 6:28 PM
  */
+ 
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <signal.h>
+#include <unistd.h>
+
 
 #ifndef CONSOLESERVER_H
 #define CONSOLESERVER_H
@@ -19,7 +26,9 @@ extern "C" {
 #endif
 
 
-
+pthread_t console_start();
+int console_stop();
+void *run(void *vargp);
 
 #ifdef __cplusplus
 }
